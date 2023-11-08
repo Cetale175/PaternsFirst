@@ -7,7 +7,7 @@ import ru.netology.delivery.data.DataGenerator;
 
 import static com.codeborne.selenide.Selenide.open;
 
-class CardDeliveryTest {
+class DataGeneratorTest {
     @BeforeEach
     void setup() {
         open("http://localhost:9999");
