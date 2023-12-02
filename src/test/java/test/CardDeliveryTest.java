@@ -1,26 +1,34 @@
-package ru.netology.delivery.test;
+package test;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 import ru.netology.delivery.data.DataGenerator;
 
-import static com.codeborne.selenide.Selenide.open;
+import java.time.Duration;
 
-class DataGeneratorTest {
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.files.DownloadActions.click;
+import static ru.netology.delivery.data.DataGenerator.Registration.generateUser;
+
+class CardDeliveryTest {
     @BeforeEach
     void setup() {
         open("http://localhost:9999");
     }
 
     @Test
-    @DisplayName("Should successful plun meeting")
+    @DisplayName("Should successful plan meeting")
     void shouldSuccessfulPlanMeeting() {
-        DataGenerator.userInfo validUser = DataGenerator.Registration / generateUser("ru");
+        DataGenerator.UserInfo validUser = DataGenerator.Registration.generateUser("ru");
         int daysToAddForFirstMeeting = 4;
-        String firstMeetingDate = DateGenerator.generateDate(daysToAddForFirstMeeting);
+        String firstMeetingDate = DataGenerator.generateDate(daysToAddForFirstMeeting);
         int daysToAddForSecondMeeting = 7;
-        String secondMeetingDate DataGenerator.generateDate(daysToAddForSecondMeeting);
+        String secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
         $("[date-test-id=city] input").setValue(validUser.getCity());
         $("[date-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[date-test-id=date] input").setValue(firstMeetingDate);
@@ -36,11 +44,10 @@ class DataGeneratorTest {
         $("[date-test-id=date] input").setValue(secondMeetingDate);
         $(byText("Залпанировать")).click();
         $("[data-test-id='replan-notification'].notification__content")
-                .shouldHave(Text("У вас уже запланирована встречча на другую дату. Перепланировать?"))
+                .shouldHave(text("У вас уже запланирована встречча на другую дату. Перепланировать?"))
                 .shouldBe(visible);
-        $ "[data-test-id='replan-notification'dutton").click();
-        $ "[data-test-id='success-notification'].notification__content")
-.shouldHave(exactText("Встереча успешно запланирована на" + secondMeetingDate))
-                .shouldBe(visible);
+        $("[data-test-id='replan-notification'] button").click();
+        $("[data-test-id='success-notification'] .notification__content").shouldHave(exactText("Встеча успешно запланирована на " + secondMeetingDate)).shouldBe(visible);
+
     }
 }
