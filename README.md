@@ -1,1 +1,1 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/xjvg60s9yenacakj?svg=true)](https://ci.appveyor.com/project/Cetale175/paternsfirst)
+[![Java CI with Gradle](https://github.com/Cetale175/PaternsFirst/actions/workflows/gradle.yml/badge.svg)](https://github.com/Cetale175/PaternsFirst/actions/workflows/gradle.yml)
