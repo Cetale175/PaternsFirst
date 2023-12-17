@@ -29,19 +29,19 @@ class CardDeliveryTest {
         String firstMeetingDate = DataGenerator.generateDate(daysToAddForFirstMeeting);
         int daysToAddForSecondMeeting = 7;
         String secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
-        $("[date-test-id=city] input").setValue(validUser.getCity());
-        $("[date-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $("[date-test-id=date] input").setValue(firstMeetingDate);
-        $("[date-test-id=name] input").setValue(validUser.getName());
-        $("[date-test-id=phone] input").setValue(validUser.getPhone());
-        $("[date-test-id=agreement]").click();
+        $("[data-test-id=city] input").setValue(validUser.getCity());
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
+        $("[data-test-id=date] input").setValue(firstMeetingDate);
+        $("[data-test-id=name] input").setValue(validUser.getName());
+        $("[data-test-id=phone] input").setValue(validUser.getPhone());
+        $("[data-test-id=agreement]").click();
         $(byText("Залпанировать")).click();
         $(byText("Успешно!")).shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id='success-notification'].notification__content")
                 .shouldHave(exactText("Встреча успешно запланировна на" + firstMeetingDate))
                 .shouldBe(visible);
-        $("[date-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
-        $("[date-test-id=date] input").setValue(secondMeetingDate);
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
+        $("[data-test-id=date] input").setValue(secondMeetingDate);
         $(byText("Залпанировать")).click();
         $("[data-test-id='replan-notification'].notification__content")
                 .shouldHave(text("У вас уже запланирована встречча на другую дату. Перепланировать?"))
