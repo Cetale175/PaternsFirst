@@ -7,8 +7,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    build_script:
-      - ./gradlew test --info -Dselenide.headless=true
 
 
     steps:
@@ -25,6 +23,6 @@ jobs:
         run: java -jar ./artifacts/app-card-delivery.jar &
       - name: Build with Gradle
      
-        run: ./gradlew test --info
+        run: ./gradlew test --info -Dselenide.headless=true
 
 
